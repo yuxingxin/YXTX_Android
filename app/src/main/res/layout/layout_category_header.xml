@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal" android:layout_width="match_parent"
+    android:layout_height="36dp"
+    android:background="@android:color/white"
+    android:layout_marginBottom="1dp"
+    >
+
+    <TextView
+        android:id="@+id/group_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="面向对象"
+        android:textColor="@color/primary"
+        android:textSize="18sp"
+        android:paddingLeft="22dp"
+        android:layout_centerVertical="true"
+        />
+    <TextView
+        android:id="@+id/group_num"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="[24篇]"
+        android:textColor="@color/primary"
+        android:textSize="18sp"
+        android:layout_toRightOf="@id/group_name"
+        android:layout_centerVertical="true"
+        />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/primary"
+        android:layout_alignParentBottom="true"
+        />
+
+</RelativeLayout>

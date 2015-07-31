@@ -1,0 +1,41 @@
+<resources>
+    <string name="app_name">宇信同行</string>
+    <!-- General -->
+    <string name="career_txt">Mobile Developer</string>
+    <string name="location_txt">Xi\'an,Shaanxi,China</string>
+    <string name="facebook_txt"><a href="https://www.facebook.com/profile.php?id=1000047169">Facebook</a></string>
+    <string name="twitter_txt"><a href="https://twitter.com/yuxingxin">Twitter</a></string>
+    <string name="weibo_txt"><a href="http://weibo.com/lx8909">Weibo</a></string>
+    <string name="stackoverflow_txt"><a href="http://stackoverflow.com/users/4866682/yuxingxin">stackoverflow</a></string>
+    <string name="google_plus_txt"><a href="https://plus.google.com/u/0/110644828953450971561/posts">Google+</a></string>
+    <string name="github_txt"><a href="https://github.com/yuxingxin">GitHub</a></string>
+    <string name="weixin_txt">微信公众号yuxingxin919</string>
+    <string name="copyright_txt">© 2015 宇信同行. By yuxingxin</string>
+    <string name="click_refresh_txt">点击刷新</string>
+    <string name="loading_txt">正在加载中...</string>
+    <!-- Toolbar titles -->
+    <string name="toolbar_title_home">主页</string>
+    <string name="toolbar_title_category">分类</string>
+    <string name="toolbar_title_tag">标签</string>
+    <string name="toolbar_title_archive">归档</string>
+    <string name="toolbar_title_about">关于</string>
+    <string name="other_activity">Other Activity</string>
+
+    <!-- Navigation Drawer -->
+    <string name="nav_drawer_item_home">主页</string>
+    <string name="nav_drawer_item_category">分类</string>
+    <string name="nav_drawer_item_tag">标签</string>
+    <string name="nav_drawer_item_archive">归档</string>
+    <string name="nav_drawer_item_about">关于</string>
+    <string name="nav_drawer_email">邮箱</string>
+    <string name="navigation_drawer_opened">opened</string>
+    <string name="navigation_drawer_closed">closed</string>
+    <string name="tag_nav_drawer_main_entry">nav_drawer_main_entry</string>
+    <string name="tag_nav_drawer_special_entry">nav_drawer_special_entry</string>
+    <string name="tools_text_account_information_username">Sean Liu</string>
+    <string name="tools_text_account_information_profile">Just want to make a good app</string>
+
+    <!-- Typeface names -->
+    <string name="typeface_roboto_regular">Roboto-Regular</string>
+    <string name="typeface_roboto_medium">Roboto-Medium</string>
+</resources>

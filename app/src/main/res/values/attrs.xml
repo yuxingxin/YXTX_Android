@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+
+    <!--Scrim insets view that allows the drawer the be behind the status bar and visible -->
+    <declare-styleable name="ScrimInsetsView">
+        <attr name="scrimInsetForeground" format="reference|color" />
+    </declare-styleable>
+
+    <!-- ColorState to be used in the TinOnImageView view -->
+    <declare-styleable name="TintOnStateImageView">
+        <attr name="colorStateList" format="reference|color" />
+    </declare-styleable>
+
+    <!-- EmptyViewLayout -->
+    <declare-styleable name="EmptyViewLayout">
+        <attr name="loadingView" format="reference"/>
+        <attr name="emptyView" format="reference"/>
+        <attr name="errorView" format="reference"/>
+        <attr name="abnormalView" format="reference"/>
+    </declare-styleable>
+
+</resources>

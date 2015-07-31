@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    >
+    <include
+        layout="@layout/view_toolbar"/>
+    <com.yuxingxin.yxtx.layout.EmptyViewLayout
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        app:abnormalView="@layout/view_container_nonet"
+        app:emptyView="@layout/view_container_empty"
+        app:errorView="@layout/view_container_error"
+        android:id="@android:id/empty"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    <com.yuxingxin.yxtx.view.ProgressWebView
+        android:id="@+id/webview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </com.yuxingxin.yxtx.view.ProgressWebView>
+
+    </com.yuxingxin.yxtx.layout.EmptyViewLayout>
+</LinearLayout>

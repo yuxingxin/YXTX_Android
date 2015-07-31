@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.yuxingxin.yxtx.layout.EmptyViewLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:abnormalView="@layout/view_container_nonet"
+    app:emptyView="@layout/view_container_empty"
+    app:errorView="@layout/view_container_error"
+    android:id="@android:id/empty"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    >
+<ScrollView
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+    <com.yuxingxin.yxtx.layout.TagLayout
+        android:id="@+id/taglayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="15dp"
+        >
+
+    </com.yuxingxin.yxtx.layout.TagLayout>
+</ScrollView></com.yuxingxin.yxtx.layout.EmptyViewLayout>
