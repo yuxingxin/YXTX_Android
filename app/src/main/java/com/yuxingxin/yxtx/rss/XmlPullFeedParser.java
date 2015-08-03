@@ -1,6 +1,5 @@
 package com.yuxingxin.yxtx.rss;
 
-import android.util.Log;
 import android.util.Xml;
 
 import com.yuxingxin.yxtx.model.ArticleTable;
@@ -80,7 +79,6 @@ public class XmlPullFeedParser extends BaseFeedParser{
                 eventType = parser.next();
             }
         } catch (Exception e) {
-            Log.v("===","========Exception=====");
             throw new RuntimeException(e);
         }
         return list;

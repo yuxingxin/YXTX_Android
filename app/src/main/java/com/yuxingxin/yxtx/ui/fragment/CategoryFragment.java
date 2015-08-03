@@ -54,9 +54,9 @@ public class CategoryFragment extends BaseFragment{
             @Override
             public void onRefresh() {
                 mRefreshLayout.setRefreshing(true);
-                if (NetWorkHelper.isConnected(getActivity())){
+                if (NetWorkHelper.isConnected(getActivity())) {
                     loadData();
-                }else{
+                } else {
                     new Handler().postDelayed(new Runnable() {
                         @Override
                         public void run() {
@@ -64,7 +64,7 @@ public class CategoryFragment extends BaseFragment{
                             mRefreshLayout.setRefreshing(false);
                             emptyLayout.showErrorView();
                         }
-                    },2000);
+                    }, 2000);
                 }
             }
         });
@@ -77,18 +77,29 @@ public class CategoryFragment extends BaseFragment{
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                if (categoryList.get(position).getType() == Category.ITEM){
+                if (categoryList.get(position).getType() == Category.ITEM) {
                     Intent intent = new Intent(getActivity(), ArticleActivity.class);
                     intent.putExtra(RssConfig.LINK, categoryList.get(position).getUrl());
-                    intent.putExtra(RssConfig.TITLE,categoryList.get(position).getTitle());
+                    intent.putExtra(RssConfig.TITLE, categoryList.get(position).getTitle());
                     startActivity(intent);
                 }
             }
         });
+        emptyLayout.setErrorViewClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (NetWorkHelper.isConnected(getActivity())){
+                    loadData();
+                }else{
+                    Toast.makeText(getActivity(),"网络无连接",Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
         if (NetWorkHelper.isConnected(getActivity())){
             showContent();
         }else{
-            emptyLayout.showAbnormalView();
+            emptyLayout.showErrorView();
         }
         return view;
     }

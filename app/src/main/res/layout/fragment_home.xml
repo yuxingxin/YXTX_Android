@@ -4,7 +4,7 @@
     app:abnormalView="@layout/view_container_nonet"
     app:emptyView="@layout/view_container_empty"
     app:errorView="@layout/view_container_error"
-    android:id="@android:id/empty"
+    android:id="@+id/empty_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@android:color/white"

@@ -91,6 +91,16 @@ public class ArchiveFragment extends BaseFragment{
                 startActivity(intent);
             }
         });
+        emptyLayout.setErrorViewClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (NetWorkHelper.isConnected(getActivity())){
+                    loadData();
+                }else{
+                    Toast.makeText(getActivity(),"网络无连接",Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
 
         mRecycleView.setHasFixedSize(true);
         mRecycleView.setLayoutManager(manager);
@@ -99,7 +109,7 @@ public class ArchiveFragment extends BaseFragment{
         if (NetWorkHelper.isConnected(getActivity())){
             showContent();
         }else{
-            emptyLayout.showAbnormalView();
+            emptyLayout.showErrorView();
         }
         return view;
     }

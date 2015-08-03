@@ -45,17 +45,17 @@ public class HomeFragment extends BaseFragment{
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home,null);
-        emptyLayout = (EmptyViewLayout)view.findViewById(android.R.id.empty);
+        emptyLayout = (EmptyViewLayout)view.findViewById(R.id.empty_layout);
         mRefreshLayout = (SwipeRefreshLayout)view.findViewById(R.id.refresh_layout);
         mRefreshLayout.setProgressBackgroundColorSchemeResource(R.color.primary);
         mRefreshLayout.setColorSchemeResources(android.R.color.white);
         mRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-            mRefreshLayout.setRefreshing(true);
-                if (NetWorkHelper.isConnected(getActivity())){
+                mRefreshLayout.setRefreshing(true);
+                if (NetWorkHelper.isConnected(getActivity())) {
                     loadData();
-                }else{
+                } else {
                     new Handler().postDelayed(new Runnable() {
                         @Override
                         public void run() {
@@ -63,7 +63,7 @@ public class HomeFragment extends BaseFragment{
                             mRefreshLayout.setRefreshing(false);
                             emptyLayout.showErrorView();
                         }
-                    },2000);
+                    }, 2000);
                 }
             }
         });
@@ -88,6 +88,17 @@ public class HomeFragment extends BaseFragment{
             }
         });
 
+        emptyLayout.setErrorViewClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (NetWorkHelper.isConnected(getActivity())){
+                    loadData();
+                }else{
+                    Toast.makeText(getActivity(),"网络无连接",Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
         mRecycleView.setHasFixedSize(true);
         mRecycleView.setLayoutManager(manager);
         mRecycleView.setAdapter(mAdapter);
@@ -95,7 +106,7 @@ public class HomeFragment extends BaseFragment{
         if (NetWorkHelper.isConnected(getActivity())){
             showContent();
         }else{
-            emptyLayout.showAbnormalView();
+            emptyLayout.showErrorView();
         }
         return view;
     }
