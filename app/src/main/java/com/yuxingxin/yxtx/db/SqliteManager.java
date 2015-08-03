@@ -15,11 +15,6 @@ import java.util.List;
  */
 public class SqliteManager {
 
-    public SqliteManager(Context context){
-        this.context = context;
-        createDataBase(context);
-    }
-
     public static final String TABLE_NAME = "article";
 
     public static final String CREATE_ARTICLE = "create table "+ TABLE_NAME +" " +
@@ -45,13 +40,18 @@ public class SqliteManager {
         return context.getDatabasePath(name).exists();
     }
 
+    public SqliteManager(Context context){
+        this.context = context;
+        createDataBase(context);
+    }
+
     /**
      * 创建数据库
      * @param context
      */
     public void createDataBase(Context context){
         this.context = context;
-        if (context != null) {
+        if (db == null) {
             DatabaseHelper.CreateDataBaseListener createDataBaseListener = new DatabaseHelper.CreateDataBaseListener() {
                 @Override
                 public void onCreate(SQLiteDatabase db) {
