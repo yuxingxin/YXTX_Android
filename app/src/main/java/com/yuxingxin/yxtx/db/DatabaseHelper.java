@@ -9,6 +9,10 @@ import android.database.sqlite.SQLiteOpenHelper;
  */
 public class DatabaseHelper extends SQLiteOpenHelper{
 
+    private static DatabaseHelper helper;
+    private static String DATABASE_NAME = "articles.db";
+    private static int VERSION = 1;
+
     public DatabaseHelper(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
         super(context, name, factory, version);
     }
@@ -17,6 +21,13 @@ public class DatabaseHelper extends SQLiteOpenHelper{
                         , CreateDataBaseListener createDataBaseListener) {
         super(context, name, factory, version);
         this.createDataBaseListener = createDataBaseListener;
+    }
+
+    public static DatabaseHelper newInstance(Context context,CreateDataBaseListener listener){
+        if (helper == null){
+            helper = new DatabaseHelper(context,DATABASE_NAME,null,VERSION,listener);
+        }
+        return helper;
     }
 
     @Override

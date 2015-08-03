@@ -27,14 +27,15 @@ public class SqliteManager {
             +")";
 
     private Context context;
-    private String DATABASE_NAME = "articles.db";
-    private int VERSION = 1;
+
     private DatabaseHelper helper ;
 
     private SQLiteDatabase db ;
 
     private String[] TAGS = {"TAG"};
     private String[] CATEGORIES = {"CATEGORY"};
+
+    private SqliteManager manager;
 
     public boolean hasDatabase(String name){
         return context.getDatabasePath(name).exists();
@@ -64,7 +65,7 @@ public class SqliteManager {
                 }
             };
 
-            helper = new DatabaseHelper(context,DATABASE_NAME,null,VERSION,createDataBaseListener);
+            helper = DatabaseHelper.newInstance(context,createDataBaseListener);
             db = helper.getWritableDatabase();
         }
     }
