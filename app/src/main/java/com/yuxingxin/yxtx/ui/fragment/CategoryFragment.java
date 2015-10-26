@@ -72,19 +72,24 @@ public class CategoryFragment extends BaseFragment{
         listView = (GroupListView)view.findViewById(R.id.list);
         query();
 
-        adapter = new CategoryAdapter(getActivity(), categoryList);
-        listView.setAdapter(adapter);
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                if (categoryList.get(position).getType() == Category.ITEM) {
-                    Intent intent = new Intent(getActivity(), ArticleActivity.class);
-                    intent.putExtra(RssConfig.LINK, categoryList.get(position).getUrl());
-                    intent.putExtra(RssConfig.TITLE, categoryList.get(position).getTitle());
-                    startActivity(intent);
+        if (adapter == null){
+            adapter = new CategoryAdapter(getActivity(), categoryList);
+            listView.setAdapter(adapter);
+            listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    if (categoryList.get(position).getType() == Category.ITEM) {
+                        Intent intent = new Intent(getActivity(), ArticleActivity.class);
+                        intent.putExtra(RssConfig.LINK, categoryList.get(position).getUrl());
+                        intent.putExtra(RssConfig.TITLE, categoryList.get(position).getTitle());
+                        startActivity(intent);
+                    }
                 }
-            }
-        });
+            });
+        }else{
+            adapter.notifyDataSetChanged();
+        }
+
         emptyLayout.setErrorViewClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -143,6 +148,7 @@ public class CategoryFragment extends BaseFragment{
             }
         }
     }
+
     protected void showContent(){
         if (categoryList.size() == 0){
             emptyLayout.showEmptyView();

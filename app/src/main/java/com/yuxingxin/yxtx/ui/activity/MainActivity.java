@@ -3,6 +3,8 @@ package com.yuxingxin.yxtx.ui.activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.view.Gravity;
@@ -47,6 +49,13 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
             mTextView_Email, mTextView_About;
 
     private long exitTime = 0;
+
+    private HomeFragment mHomeFragment;
+    private CategoryFragment mCategoryFragment;
+    private TagFragment mTagFragment;
+    private ArchiveFragment mArchiveFragment;
+    private AboutFragment mAboutFragment;
+    private Fragment currentFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -134,9 +143,12 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
         getSupportActionBar().setTitle(R.string.toolbar_title_home);
         mFrameLayout_Home.setSelected(true);
 
+        currentFragment = HomeFragment.newInstance();
+
         getSupportFragmentManager()
                 .beginTransaction()
-                .add(R.id.main_activity_content_frame, HomeFragment.newInstance())
+                .add(R.id.main_activity_content_frame, HomeFragment.newInstance()
+                ,HomeFragment.class.getSimpleName())
                 .commit();
     }
 
@@ -154,10 +166,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
                         }
                         v.setSelected(true);
 
-                        getSupportFragmentManager()
-                                .beginTransaction()
-                                .replace(R.id.main_activity_content_frame, HomeFragment.newInstance())
-                                .commit();
+                        addOrShowFragment(getSupportFragmentManager().beginTransaction()
+                                ,getFragment(HomeFragment.class.getSimpleName()));
                         break;
                     }
                     case R.id.navigation_drawer_items_list_linearLayout_category: {
@@ -166,10 +176,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
                         }
                         v.setSelected(true);
 
-                        getSupportFragmentManager()
-                                .beginTransaction()
-                                .replace(R.id.main_activity_content_frame, CategoryFragment.newInstance())
-                                .commit();
+                        addOrShowFragment(getSupportFragmentManager().beginTransaction(),
+                                getFragment(CategoryFragment.class.getSimpleName()));
                         break;
                     }
                     case R.id.navigation_drawer_items_list_linearLayout_tag: {
@@ -178,10 +186,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
                         }
                         v.setSelected(true);
 
-                        getSupportFragmentManager()
-                                .beginTransaction()
-                                .replace(R.id.main_activity_content_frame, TagFragment.newInstance())
-                                .commit();
+                        addOrShowFragment(getSupportFragmentManager().beginTransaction(),
+                                getFragment(TagFragment.class.getSimpleName()));
                         break;
                     }
                     case R.id.navigation_drawer_items_list_linearLayout_archive: {
@@ -190,10 +196,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
                         }
                         v.setSelected(true);
 
-                        getSupportFragmentManager()
-                                .beginTransaction()
-                                .replace(R.id.main_activity_content_frame, ArchiveFragment.newInstance())
-                                .commit();
+                        addOrShowFragment(getSupportFragmentManager().beginTransaction(),
+                                getFragment(ArchiveFragment.class.getSimpleName()));
                         break;
                     }
                     case R.id.navigation_drawer_items_list_linearLayout_about: {
@@ -202,10 +206,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
                         }
                         v.setSelected(true);
 
-                        getSupportFragmentManager()
-                                .beginTransaction()
-                                .replace(R.id.main_activity_content_frame, AboutFragment.newInstance())
-                                .commit();
+                        addOrShowFragment(getSupportFragmentManager().beginTransaction(),
+                                getFragment(AboutFragment.class.getSimpleName()));
                         break;
                     }
                     case R.id.navigation_drawer_items_list_linearLayout_email:
@@ -223,6 +225,47 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
             }
         }
 
+    }
+
+    private Fragment getFragment(String tag){
+        Fragment fragment = getSupportFragmentManager().findFragmentByTag(String.valueOf(tag));
+        if (fragment != null){
+            return fragment;
+        }
+
+        if (tag.equals(HomeFragment.class.getSimpleName())){
+            return HomeFragment.newInstance();
+        }else if(tag.equals(CategoryFragment.class.getSimpleName())){
+            return CategoryFragment.newInstance();
+        }else if(tag.equals(TagFragment.class.getSimpleName())){
+            return TagFragment.newInstance();
+        }else if (tag.equals(ArchiveFragment.class.getSimpleName())){
+            return ArchiveFragment.newInstance();
+        }else{
+            return AboutFragment.newInstance();
+        }
+
+    }
+
+    /**
+     * 添加或者显示碎片
+     *
+     * @param transaction
+     * @param fragment
+     */
+    private void addOrShowFragment(FragmentTransaction transaction,
+                                   Fragment fragment) {
+        if (currentFragment == fragment){
+            return;
+        }
+
+        if (!fragment.isAdded()) { // 如果当前fragment未被添加，则添加到Fragment管理器中
+            transaction.hide(currentFragment).add(R.id.main_activity_content_frame, fragment,
+                    fragment.getClass().getSimpleName()).commitAllowingStateLoss();
+        } else {
+            transaction.hide(currentFragment).show(fragment).commitAllowingStateLoss();
+        }
+        currentFragment = fragment;
     }
 
     /**

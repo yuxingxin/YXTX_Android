@@ -77,31 +77,36 @@ public class HomeFragment extends BaseFragment{
             list.get(i).setDrawable(TextDrawable.builder()
                     .buildRound(String.valueOf(PinyinHelper.getShortPinyin(list.get(i).getTitle()).charAt(0)).toUpperCase(), generator.getRandomColor()));
         }
-        mAdapter = new ArticleAdapter(getActivity(), list);
-        mAdapter.setOnItemClickListener(new MyItemClickListener() {
-            @Override
-            public void onItemClick(View view, int position) {
-                Intent intent = new Intent(getActivity(), ArticleActivity.class);
-                intent.putExtra(RssConfig.LINK, list.get(position).getUrl());
-                intent.putExtra(RssConfig.TITLE,list.get(position).getTitle());
-                startActivity(intent);
-            }
-        });
+        if (mAdapter == null){
+            mAdapter = new ArticleAdapter(getActivity(), list);
+            mAdapter.setOnItemClickListener(new MyItemClickListener() {
+                @Override
+                public void onItemClick(View view, int position) {
+                    Intent intent = new Intent(getActivity(), ArticleActivity.class);
+                    intent.putExtra(RssConfig.LINK, list.get(position).getUrl());
+                    intent.putExtra(RssConfig.TITLE,list.get(position).getTitle());
+                    startActivity(intent);
+                }
+            });
+            mRecycleView.setHasFixedSize(true);
+            mRecycleView.setLayoutManager(manager);
+            mRecycleView.setAdapter(mAdapter);
+        } else {
+            mAdapter.notifyDataSetChanged();
+        }
 
         emptyLayout.setErrorViewClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (NetWorkHelper.isConnected(getActivity())){
+                if (NetWorkHelper.isConnected(getActivity())) {
                     loadData();
-                }else{
+                } else {
                     Toast.makeText(getActivity(),"网络无连接",Toast.LENGTH_SHORT).show();
                 }
             }
         });
 
-        mRecycleView.setHasFixedSize(true);
-        mRecycleView.setLayoutManager(manager);
-        mRecycleView.setAdapter(mAdapter);
+
         sqliteManager.close();
         if (NetWorkHelper.isConnected(getActivity())){
             showContent();
